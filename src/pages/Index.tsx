@@ -14,11 +14,36 @@ const Index = () => {
           <div className="flex items-center justify-between">
             <CuidaLogo size="sm" showText={false} />
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-gray-600 hover:text-primary text-sm font-nunito">Registry</a>
-              <a href="#" className="text-gray-600 hover:text-primary text-sm font-nunito">Technologies</a>
-              <a href="#" className="text-gray-600 hover:text-primary text-sm font-nunito">Departments</a>
-              <a href="#" className="text-gray-600 hover:text-primary text-sm font-nunito">About</a>
-              <a href="#" className="text-gray-600 hover:text-primary text-sm font-nunito">Contact</a>
+              <Link
+                to="/registry"
+                className="text-gray-600 hover:text-primary text-sm font-nunito"
+              >
+                Registry
+              </Link>
+              <Link
+                to="/technologies"
+                className="text-gray-600 hover:text-primary text-sm font-nunito"
+              >
+                Technologies
+              </Link>
+              <Link
+                to="/departments"
+                className="text-gray-600 hover:text-primary text-sm font-nunito"
+              >
+                Departments
+              </Link>
+              <Link
+                to="/about"
+                className="text-gray-600 hover:text-primary text-sm font-nunito"
+              >
+                About
+              </Link>
+              <Link
+                to="/contact"
+                className="text-gray-600 hover:text-primary text-sm font-nunito"
+              >
+                Contact
+              </Link>
             </div>
           </div>
         </div>
@@ -176,3 +201,4 @@ const Index = () => {
 };
 
 export default Index;
+
