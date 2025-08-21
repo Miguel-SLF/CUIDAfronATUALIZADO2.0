@@ -1,26 +1,33 @@
+import React from "react";
 import { Toaster } from "@/components/ui/toaster"; 
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import HomePage from "./pages/HomePage";
-import Index from "./pages/Index"; // Funcionário
-import Portal from "./pages/Clientes/Portal"; // Cliente
-import Login from "./pages/Funcionarios/Login";
-import Cadastro from "./pages/Funcionarios/Cadastro";
-import NotFound from "./pages/NotFound";
+// Páginas principais
+import HomePage from "@/pages/HomePage";
+import Index from "@/pages/Funcionarios/Dashboard/Index";
+import Portal from "@/pages/Clientes/Portal";
+import Login from "@/pages/Funcionarios/Login-Cadastro/Login";
+import Cadastro from "@/pages/Funcionarios/Login-Cadastro/Cadastro";
+import NotFound from "@/pages/NotFound";
 
-// Novas páginas
-import Registry from "./pages/Funcionarios/Registry";
-import Technologies from "./pages/Funcionarios/Technologies";
-import Departments from "./pages/Funcionarios/Departments";
+// Página de medicamentos
+import MedicamentosPage from "@/pages/Funcionarios/Dashboard/Medicines/MedicamentosPage";
 
-import PrivateRoute from "./components/PrivateRoute";
+// Página de clientes cadastrados
+import ClientesCadastradosPage from "@/pages/Funcionarios/Dashboard/ClientesCadastrados";
+
+// Página de Documento
+import Documento from "@/pages/Funcionarios/Dashboard/Documentos";
+
+// Rota protegida
+import PrivateRoute from "@/components/PrivateRoute";
 
 const queryClient = new QueryClient();
 
-const App = () => (
+const App: React.FC = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
       <Toaster />
@@ -35,17 +42,24 @@ const App = () => (
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/portal-cidadao" element={<Portal />} />
 
-          {/* Rotas públicas das novas páginas */}
-          <Route path="/registry" element={<Registry />} />
-          <Route path="/technologies" element={<Technologies />} />
-          <Route path="/departments" element={<Departments />} />
+          {/* Lista de Medicamentos */}
+          <Route path="/medicamentos" element={<MedicamentosPage />} />
+
+          {/* Página de Clientes Cadastrados */}
+          <Route path="/clientes-cadastrados" element={<ClientesCadastradosPage />} />
+
+          {/* Página de Documento */}
+          <Route path="/documento" element={<Documento />} />
 
           {/* Rota protegida - funcionário */}
-          <Route path="/home-funcionario" element={
-            <PrivateRoute>
-              <Index />
-            </PrivateRoute>
-          } />
+          <Route
+            path="/home-funcionario"
+            element={
+              <PrivateRoute>
+                <Index />
+              </PrivateRoute>
+            }
+          />
 
           {/* Rota coringa */}
           <Route path="*" element={<NotFound />} />
@@ -56,4 +70,3 @@ const App = () => (
 );
 
 export default App;
-
