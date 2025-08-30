@@ -1,32 +1,18 @@
-// src/server.js
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const authRoutes = require('./routes/authRoutes');
+const publicRoutes = require('./routes/publicRoutes'); 
+
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const authRoutes = require('./routes/authRoutes');
-
-// Middlewares
 app.use(cors());
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Servidor back-end do CUIDA está rodando!');
-});
-
-// Rotas da API
 app.use('/api/auth', authRoutes);
+app.use('/api/publico', publicRoutes); 
 
 app.listen(PORT, () => {
   console.log(`Servidor rodando na porta ${PORT}`);
 });
-
-
-
-
-
-
-
-
-

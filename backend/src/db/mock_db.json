@@ -1,11 +1,4 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "nome": "Funcionario Teste",
-      "email": "funcionario@cuida.com",
-      "password": "$2a$10$ZrTwOb/sqV4ZkJgzU1sSPO0HjSdWz7UXP0IQB6.9W5J3TtrTglWky",
-      "role": "funcionario"
-    }
-  ]
+  "users": [],
+  "clients": []
 }
