@@ -1,26 +1,22 @@
-// src/controllers/authController.js
 const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
 const register = async (req, res) => {
   try {
-    const { nome, email, password } = req.body;
+    const { nome, email, password, matricula, departamento, cargo } = req.body;
 
-    // Validação de campos vazios
-    if (!nome || !email || !password) {
-      return res.status(400).json({ mensagem: "Preencha todos os campos!" });
+    if (!nome || !email || !password || !matricula || !departamento || !cargo) {
+      return res.status(400).json({ mensagem: "Preencha todos os campos obrigatórios!" });
     }
 
     const existingUser = User.findByEmail(email);
-    // Verificação de usuário já cadastrado
     if (existingUser) {
       return res.status(409).json({ mensagem: "Usuário já cadastrado!" });
     }
 
-    const newUser = await User.create({ nome, email, password });
+    const newUser = await User.create({ nome, email, password, matricula, departamento, cargo });
     
-    // Gerar um token JWT para o usuário recém-cadastrado
     const token = jwt.sign(
       { id: newUser.id, nome: newUser.nome, role: newUser.role },
       process.env.JWT_SECRET,

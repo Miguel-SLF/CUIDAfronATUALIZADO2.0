@@ -6,10 +6,19 @@ const findByEmail = (email) => {
   return db.users.find(user => user.email === email);
 };
 
-const create = async ({ nome, email, password, role = 'funcionario' }) => {
+const create = async ({ nome, email, password, matricula, departamento, cargo, role = 'funcionario' }) => {
   const db = loadDatabase();
   const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = { id: db.users.length + 1, nome, email, password: hashedPassword, role };
+  const newUser = { 
+    id: db.users.length + 1, 
+    nome, 
+    email, 
+    password: hashedPassword, 
+    matricula, 
+    departamento, 
+    cargo,
+    role 
+  };
   db.users.push(newUser);
   saveDatabase(db);
   return newUser;
