@@ -9,15 +9,15 @@ const findByEmail = (email) => {
 const create = async ({ nome, email, password, matricula, departamento, cargo, role = 'funcionario' }) => {
   const db = loadDatabase();
   const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = { 
-    id: db.users.length + 1, 
-    nome, 
-    email, 
-    password: hashedPassword, 
-    matricula, 
-    departamento, 
+  const newUser = {
+    id: db.users.length + 1,
+    nome,
+    email,
+    password: hashedPassword,
+    matricula,
+    departamento,
     cargo,
-    role 
+    role
   };
   db.users.push(newUser);
   saveDatabase(db);

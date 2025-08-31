@@ -1,4 +1,4 @@
-const User = require('../models/User');
+const Funcionario = require('../models/funcionario'); 
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 
@@ -10,13 +10,13 @@ const register = async (req, res) => {
       return res.status(400).json({ mensagem: "Preencha todos os campos obrigatórios!" });
     }
 
-    const existingUser = User.findByEmail(email);
+    const existingUser = Funcionario.findByEmail(email); 
     if (existingUser) {
       return res.status(409).json({ mensagem: "Usuário já cadastrado!" });
     }
 
-    const newUser = await User.create({ nome, email, password, matricula, departamento, cargo });
-    
+    const newUser = await Funcionario.create({ nome, email, password, matricula, departamento, cargo }); 
+
     const token = jwt.sign(
       { id: newUser.id, nome: newUser.nome, role: newUser.role },
       process.env.JWT_SECRET,
@@ -34,7 +34,7 @@ const login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const user = User.findByEmail(email);
+    const user = Funcionario.findByEmail(email);
     if (!user) {
       return res.status(400).json({ mensagem: "E-mail ou senha incorretos." });
     }

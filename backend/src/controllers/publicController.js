@@ -1,4 +1,4 @@
-const Client = require('../models/Client');
+const Cidadao = require('../models/cidadao'); 
 
 const registerClient = (req, res) => {
   const { nome, email, cpf, rg, endereco, telefone, dataNascimento, responsavel, tipoSanguineo, medicamentosAlergia, diagnostico } = req.body;
@@ -8,7 +8,7 @@ const registerClient = (req, res) => {
   }
 
   try {
-    const newClient = Client.create({ nome, email, cpf, rg, endereco, telefone, dataNascimento, responsavel, tipoSanguineo, medicamentosAlergia, diagnostico });
+    const newClient = Cidadao.create({ nome, email, cpf, rg, endereco, telefone, dataNascimento, responsavel, tipoSanguineo, medicamentosAlergia, diagnostico }); // Alterado de Client para Cidadao
     res.status(201).json({ mensagem: "Cadastro do cidadão realizado com sucesso!", cliente: newClient });
   } catch (error) {
     console.error(error);
